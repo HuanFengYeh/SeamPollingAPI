@@ -15,13 +15,13 @@ Follow these instructions to get the Polling Job API running on your local machi
 
 ### Installation
 
-1. Clone the repository:
+1. Clone the repository
 ```sh
 git clone https://github.com/yourusername/polling-job-api.git
 ```
-2.Navigate to the project directory:
+2.Navigate to the project directory
 
-3.Configure application properties:
+3.Configure application properties
 Open src/main/resources/application.properties.
 Set the database connection properties according to your setup.
 
@@ -34,6 +34,8 @@ Set the database connection properties according to your setup.
 }
 ```
 Currently only support this apiEndpoint and one task in the queue, please use the end point list above when testing.
+
 If you successfully post a request, it will return "Polling job created successfully.".
+
 If you post a request with a differnt interval, it will return "Update the interval".
 
