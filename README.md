@@ -33,6 +33,7 @@ Set the database connection properties according to your setup.
   "pollingInterval": 60000
 }
 ```
-Currently only support this apiEndpoint, please use the end point list above when testing.
-
+Currently only support this apiEndpoint and one task in the queue, please use the end point list above when testing.
+If you successfully post a request, it will return "Polling job created successfully.".
+If you post a request with a differnt interval, it will return "Update the interval".
 
