@@ -47,11 +47,15 @@ public class PollingService {
 
     try {
       if(jobRepository.findByapiEndpoint(job.getApiEndpoint()).isEmpty()) {
+        //create a new pulling job
         jobRepository.save(job);
         schedulePollingJob(job);
       }else {
-        return new ResponseEntity<>("Request job exist",
-                HttpStatus.BAD_REQUEST);
+        // Update the interval
+        jobRepository.save(job);
+        schedulePollingJob(job);
+        return new ResponseEntity<>("Update the interval",
+                HttpStatus.OK);
       }
     } catch (Exception e) {
       return new ResponseEntity<>(e.getMessage(),
@@ -61,12 +65,14 @@ public class PollingService {
             HttpStatus.OK);
   }
 
+  // Method to schedule polling jobs
   private void schedulePollingJob(PollingJ job) {
     ScheduledFuture<?> futureTask = taskScheduler.scheduleWithFixedDelay(
             () -> pollApi(job),
             job.getPollingInterval());
   }
 
+  // Method to poll the data
   private void pollApi(PollingJ job) {
     String response = restTemplate.getForObject(job.getApiEndpoint(), String.class);
     ObjectMapper objectMapper = new ObjectMapper();
@@ -77,12 +83,10 @@ public class PollingService {
           dataRepository.save(movie);
         }
       }
-      System.out.print("Successfully Update the Movies " + job.getUserId() + "\n");
+      System.out.print("Successfully Update the Movies, User: " + job.getUserId() + "\n");
     } catch (Exception e) {
       System.out.print(e.getMessage());
     }
   }
-
-
 }
 
