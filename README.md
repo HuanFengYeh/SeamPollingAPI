@@ -26,11 +26,13 @@ Open src/main/resources/application.properties.
 Set the database connection properties according to your setup.
 
 ## API Usage
+```sh
 {
   "userId": "user1",
   "apiEndpoint": "https://dummyapi.online/api/movies",
   "pollingInterval": 60000
 }
+```
 Currently only support this apiEndpoint, please use the end point list above when testing.
 
 
